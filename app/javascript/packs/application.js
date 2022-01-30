@@ -16,6 +16,7 @@ import "bootstrap"
 import { Tooltip, Popover } from "bootstrap"
 // The stylesheet location we created earlier
 require("../stylesheets/application.scss")
+require("../stylesheets/styles.css")
 
 
 
