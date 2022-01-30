@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 
 // The following configurations are for Bootstrap
+// more info https://matthewhoelter.com/2021/08/13/how-to-install-bootstrap-5-in-ruby-on-rails-6-with-webpack.html
 require("@popperjs/core")
 import "bootstrap"
 // Import the specific modules you may need (Modal, Alert, etc)
