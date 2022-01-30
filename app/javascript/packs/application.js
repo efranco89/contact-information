@@ -4,9 +4,18 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-require("turbolinks").start()
+// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
+
+// The following configurations are for Bootstrap
+require("@popperjs/core")
+import "bootstrap"
+// Import the specific modules you may need (Modal, Alert, etc)
+import { Tooltip, Popover } from "bootstrap"
+// The stylesheet location we created earlier
+require("../stylesheets/application.scss")
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
