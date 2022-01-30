@@ -18,6 +18,12 @@ import { Tooltip, Popover } from "bootstrap"
 require("../stylesheets/application.scss")
 require("../stylesheets/styles.css")
 
+// for the application layout
+require("../stylesheets/dashboard.css")
+require("../stylesheets/dashboard.rtl.css")
+// for fontawesome icons
+import "@fortawesome/fontawesome-free/css/all"
+
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
