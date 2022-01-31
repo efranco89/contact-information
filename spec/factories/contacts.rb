@@ -5,7 +5,7 @@ FactoryBot.define do
     phone { '(+57) 310 618 44 74' }
     address { 'La calle primera' }
     franchise { '' }
-    email { 'luisfrancoz1@gmail.com' }
+    sequence(:email, 1) { |n| "luisfrancoz#{n}@gmail.com" }
     user_id { 1 }
 
     trait :visa_good_number do

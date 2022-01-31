@@ -24,107 +24,31 @@ RSpec.describe "/contacts", type: :request do
   #   skip("Add a hash of attributes invalid for your model")
   # }
   #
-  # describe "GET /index" do
-  #   it "renders a successful response" do
-  #     Contact.create! valid_attributes
-  #     get contacts_url
-  #     expect(response).to be_successful
-  #   end
-  # end
-  #
-  # describe "GET /show" do
-  #   it "renders a successful response" do
-  #     contact = Contact.create! valid_attributes
-  #     get contact_url(contact)
-  #     expect(response).to be_successful
-  #   end
-  # end
-  #
-  # describe "GET /new" do
-  #   it "renders a successful response" do
-  #     get new_contact_url
-  #     expect(response).to be_successful
-  #   end
-  # end
-  #
-  # describe "GET /edit" do
-  #   it "render a successful response" do
-  #     contact = Contact.create! valid_attributes
-  #     get edit_contact_url(contact)
-  #     expect(response).to be_successful
-  #   end
-  # end
-  #
-  # describe "POST /create" do
-  #   context "with valid parameters" do
-  #     it "creates a new Contact" do
-  #       expect {
-  #         post contacts_url, params: { contact: valid_attributes }
-  #       }.to change(Contact, :count).by(1)
-  #     end
-  #
-  #     it "redirects to the created contact" do
-  #       post contacts_url, params: { contact: valid_attributes }
-  #       expect(response).to redirect_to(contact_url(Contact.last))
-  #     end
-  #   end
-  #
-  #   context "with invalid parameters" do
-  #     it "does not create a new Contact" do
-  #       expect {
-  #         post contacts_url, params: { contact: invalid_attributes }
-  #       }.to change(Contact, :count).by(0)
-  #     end
-  #
-  #     it "renders a successful response (i.e. to display the 'new' template)" do
-  #       post contacts_url, params: { contact: invalid_attributes }
-  #       expect(response).to be_successful
-  #     end
-  #   end
-  # end
-  #
-  # describe "PATCH /update" do
-  #   context "with valid parameters" do
-  #     let(:new_attributes) {
-  #       skip("Add a hash of attributes valid for your model")
-  #     }
-  #
-  #     it "updates the requested contact" do
-  #       contact = Contact.create! valid_attributes
-  #       patch contact_url(contact), params: { contact: new_attributes }
-  #       contact.reload
-  #       skip("Add assertions for updated state")
-  #     end
-  #
-  #     it "redirects to the contact" do
-  #       contact = Contact.create! valid_attributes
-  #       patch contact_url(contact), params: { contact: new_attributes }
-  #       contact.reload
-  #       expect(response).to redirect_to(contact_url(contact))
-  #     end
-  #   end
-  #
-  #   context "with invalid parameters" do
-  #     it "renders a successful response (i.e. to display the 'edit' template)" do
-  #       contact = Contact.create! valid_attributes
-  #       patch contact_url(contact), params: { contact: invalid_attributes }
-  #       expect(response).to be_successful
-  #     end
-  #   end
-  # end
-  #
-  # describe "DELETE /destroy" do
-  #   it "destroys the requested contact" do
-  #     contact = Contact.create! valid_attributes
-  #     expect {
-  #       delete contact_url(contact)
-  #     }.to change(Contact, :count).by(-1)
-  #   end
-  #
-  #   it "redirects to the contacts list" do
-  #     contact = Contact.create! valid_attributes
-  #     delete contact_url(contact)
-  #     expect(response).to redirect_to(contacts_url)
-  #   end
-  # end
+  describe "GET /index" do
+
+    let!(:user) { create(:user) }
+    let!(:contacts) {
+      create_list(:contact, 3, :visa_good_number, user_id: user.id)
+    }
+
+    let!(:user_2) { create(:user) }
+    let!(:user_2_contact) {
+      create(
+        :contact,
+        :visa_good_number,
+        user_id: user_2.id,
+        name: "User One should not have this name"
+      )
+    }
+    before :each do
+      sign_in user
+    end
+
+    it "Renders only the contacts that belong to the sessions user" do
+      get contacts_url
+      expect(response).to be_successful
+      expect(response.body).to include(contacts.first.name)
+      expect(response.body).to_not include(user_2_contact.name)
+    end
+  end
 end
