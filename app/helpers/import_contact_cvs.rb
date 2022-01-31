@@ -1,6 +1,7 @@
 class ImportContactCvs
 
   def self.starts_import(file_log:, file_path:, current_user:)
+    
     import = ContacterImport.new(path: file_path) do
       after_build do |contact|
         contact.user_id = current_user.id

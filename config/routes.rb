@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # for sidekiq
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
   resources :contact_log_failures
   resources :file_logs
   resources :contacts do

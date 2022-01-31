@@ -10,6 +10,16 @@ class ContactsController < ApplicationController
     respond_to do |format|
       unless  params[:contacts].nil?
         files = params[:contacts][:files]
+        # first saves the files in tmp
+        files_to_send = []
+        files.each do | file |
+          file_path = "/tmp/#{SecureRandom.hex}.csv"
+          File.write(file_path, File.open(file, "r:UTF-8").read)
+          files_to_send << file_path
+        end
+        ImportsContactsJob.perform_later(
+          files: files_to_send, user: current_user
+        )
         format.html { redirect_to contacts_path, notice: 'The contacts files are being processed' }
       else
         format.html { redirect_to contacts_path, alert: 'You did not select any file' }

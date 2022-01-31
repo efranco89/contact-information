@@ -9,6 +9,13 @@ Things you may want to cover:
 
 * System dependencies
 
+  For the background jobs the application depends on sidekiq and redis, please
+  make sure you have a redis server up and running, please do not forget to set
+  the envrioment variable SIDEKIQ_REDIS_SERVER_URL
+
+    * export SIDEKIQ_REDIS_SERVER_URL="redis://redis_server_url" or
+    * plase edit you .bashrc and add at the end export SIDEKIQ_REDIS_SERVER_URL="redis://redis_server_url" or
+
 * Configuration
 
 * Database creation

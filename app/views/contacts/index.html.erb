@@ -54,10 +54,10 @@
       <% @contacts.each do |contact| %>
       <tr>
         <td><%= contact.name %></td>
-        <td><%= contact.birthday %></td>
+        <td><%= contact.birthday.strftime('%Y %B %e') %></td>
         <td><%= contact.phone %></td>
         <td><%= contact.address %></td>
-        <td><%= contact.credit_card %></td>
+        <td><%= contact.credit_card.last(4) %></td>
         <td><%= contact.franchise %></td>
         <td><%= contact.email %></td>
       </tr>
