@@ -39,6 +39,12 @@ gem 'csv-importer'
 
 # for background jobs
 gem 'sidekiq'
+# to build fake info
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+
+# for pagination
+gem 'will_paginate', '>= 3.1'
+gem 'will_paginate-bootstrap-style'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

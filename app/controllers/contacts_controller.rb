@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts or /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.where(user_id: current_user.id).order(:name).paginate(page: params[:page], per_page: 15)
   end
 
   def import

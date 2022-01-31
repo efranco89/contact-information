@@ -1,7 +1,7 @@
 class ImportContactCvs
 
   def self.starts_import(file_log:, file_path:, current_user:)
-    
+
     import = ContacterImport.new(path: file_path) do
       after_build do |contact|
         contact.user_id = current_user.id
@@ -9,7 +9,7 @@ class ImportContactCvs
     end
 
     unless import.valid_header?
-      returns_header_error(file_log: file_log, import: import)
+      returns_header_error(file_log: file_log, import: import, file: file_path)
     else
 
       file_log.status = 'Processing'
@@ -42,10 +42,11 @@ class ImportContactCvs
 
   end
 
-  def self.returns_header_error(file_log:, import:)
+  def self.returns_header_error(file_log:, import:, file:)
     error_message = "The file headers are invalid #{import.report.message}"
     file_log.status = 'Failed'
     file_log.message = error_message
+    file_log.file_name = file
     file_log.save
     return [false, error_message]
   end

@@ -1,33 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Contacts</h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group me-2">
+      <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Contact Log Failures
+      </button>
+    </div>
+  </div>
+</div>
 
-<h1>Contact Log Failures</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Data</th>
-      <th>Error</th>
-      <th>User</th>
-      <th>Log file</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @contact_log_failures.each do |contact_log_failure| %>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
       <tr>
-        <td><%= contact_log_failure.data %></td>
-        <td><%= contact_log_failure.error %></td>
-        <td><%= contact_log_failure.user_id %></td>
-        <td><%= contact_log_failure.log_file_id %></td>
-        <td><%= link_to 'Show', contact_log_failure %></td>
-        <td><%= link_to 'Edit', edit_contact_log_failure_path(contact_log_failure) %></td>
-        <td><%= link_to 'Destroy', contact_log_failure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Error</th>
+        <th>Data</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @contact_log_failures.each do |contact_log_failure| %>
+      <tr>
+        <td><%= contact_log_failure.error %></td>
+        <td>
+          <pre>
+            <%= JSON.pretty_generate(JSON.parse(contact_log_failure.data)) %>
+          </pre>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @contact_log_failures, list_classes: %w(pagination justify-content-end) %>
+</div>
 <br>
-
-<%= link_to 'New Contact Log Failure', new_contact_log_failure_path %>
