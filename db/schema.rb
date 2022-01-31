@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_181324) do
     t.date "birthday"
     t.string "phone"
     t.string "address"
-    t.string "credit_card"
+    t.string "credit_card_ciphertext"
     t.string "franchise"
     t.string "email"
     t.bigint "user_id"

@@ -100,6 +100,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
+    lockbox (0.6.8)
     loofah (2.13.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -255,6 +256,7 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  lockbox
   puma (~> 4.1)
   rails (~> 6.0.4, >= 6.0.4.4)
   rails-controller-testing

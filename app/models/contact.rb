@@ -3,10 +3,10 @@ class Contact < ApplicationRecord
   before_validation :sets_credit_card_franchise
   belongs_to :user
   validates_presence_of :address, :birthday, :credit_card, :email, :franchise, :name, :phone
+  encrypts :credit_card
 
   # validates date format to ISO 8601
   DATE_FORMAT_SLASH = %r'(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])'
-  # DATE_FORMAT_HYPHEN = /^(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[0-1]|0[1-9]|[1-2][0-9])$/
   DATE_FORMAT_HYPHEN = %r'(-?(?:[1-9][0-9]*)?[0-9]{4})\/(1[0-2]|0[1-9])\/(3[0-1]|0[1-9]|[1-2][0-9])'
   VALID_DATE_FORMAT = /\A(#{DATE_FORMAT_SLASH}|#{DATE_FORMAT_HYPHEN})\z/
   validates :birthday, format: {
@@ -37,6 +37,7 @@ class Contact < ApplicationRecord
     message: "The phone number format is invalid, allowed format are (+00) 000 000 00 00 00 or (+00) 000 000 00 00"
   }
 
+  # This method will set the credit card franchise before de validations
   def sets_credit_card_franchise
     franchises = [
       {
@@ -180,17 +181,18 @@ class Contact < ApplicationRecord
         regex: %r'\A(417500)\d{10}\z'
       },
     ]
-    contact_franchise = franchises.select { |franchise|
-      franchise if self.credit_card.match(franchise[:regex])
-    }.first
-    unless contact_franchise.nil?
-      self.franchise = contact_franchise[:issuer]
+    if self.credit_card.nil? || self.credit_card.empty?
+      errors.add(:franchise, 'The credit card number is either nil or empty')
     else
-      errors.add(:franchise, "The credit card number is incorrect, please verify")
+      contact_franchise = franchises.select { |franchise|
+        franchise if self.credit_card.match(franchise[:regex])
+      }.first
+      # if it can find the franchise with the regex match will assign it to the object
+      unless contact_franchise.nil?
+        self.franchise = contact_franchise[:issuer]
+      else
+        errors.add(:franchise, "The credit card number is incorrect, please verify")
+      end
     end
   end
-
-
-
-
 end
