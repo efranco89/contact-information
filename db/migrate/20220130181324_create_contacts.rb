@@ -8,7 +8,7 @@ class CreateContacts < ActiveRecord::Migration[6.0]
       t.string :credit_card
       t.string :franchise
       t.string :email
-      t.string :user_id
+      t.bigint :user_id
 
       t.timestamps
     end

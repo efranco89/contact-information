@@ -14,13 +14,13 @@ ActiveRecord::Schema.define(version: 2022_01_30_181324) do
 
   create_table "contacts", force: :cascade do |t|
     t.string "name"
-    t.string "birthday"
+    t.date "birthday"
     t.string "phone"
     t.string "address"
     t.string "credit_card"
     t.string "franchise"
     t.string "email"
-    t.string "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
