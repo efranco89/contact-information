@@ -3,6 +3,7 @@ class Contact < ApplicationRecord
   before_validation :sets_credit_card_franchise
   belongs_to :user
   validates_presence_of :address, :birthday, :credit_card, :email, :franchise, :name, :phone
+  validate :validates_not_repeated_contact_info
   encrypts :credit_card
 
   # validates date format to ISO 8601
@@ -193,6 +194,13 @@ class Contact < ApplicationRecord
       else
         errors.add(:franchise, "The credit card number is incorrect, please verify")
       end
+    end
+  end
+
+  def validates_not_repeated_contact_info
+    existing_contact = Contact.where(email: self.email, user_id: self.user_id).first
+    unless existing_contact.nil?
+      errors.add(:email, 'The user already has a contact info with that email')
     end
   end
 end
