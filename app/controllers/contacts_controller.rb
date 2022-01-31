@@ -6,6 +6,17 @@ class ContactsController < ApplicationController
     @contacts = Contact.all
   end
 
+  def import
+    respond_to do |format|
+      unless  params[:contacts].nil?
+        files = params[:contacts][:files]
+        format.html { redirect_to contacts_path, notice: 'The contacts files are being processed' }
+      else
+        format.html { redirect_to contacts_path, alert: 'You did not select any file' }
+      end
+    end
+  end
+
   # GET /contacts/1 or /contacts/1.json
   def show
   end
@@ -59,12 +70,12 @@ class ContactsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def contact_params
-      params.require(:contact).permit(:name, :birthday, :phone, :address, :credit_card, :franchise, :email, :user_id)
-    end
+    # def set_contact
+    #   @contact = Contact.find(params[:id])
+    # end
+    #
+    # # Only allow a list of trusted parameters through.
+    # def contact_params
+    #   params.require(:contact).permit(:name, :birthday, :phone, :address, :credit_card, :franchise, :email, :user_id)
+    # end
 end

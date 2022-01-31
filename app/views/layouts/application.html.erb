@@ -11,14 +11,17 @@
   </head>
   <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Company name</a>
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Contact Information</a>
       <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-          <a class="nav-link px-3" href="#">Sign out</a>
+          <!-- <a class="" href="#">Sign out</a> -->
+          <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link px-3' do %>
+            <i class="fas fa-sign-out-alt"></i>&nbsp;Logout
+          <% end %>
         </div>
       </div>
     </header>
@@ -28,10 +31,9 @@
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard
-                </a>
+                <%= link_to root_path, class: 'nav-link active' do %>
+                  <i class="fas fa-tachometer-alt"></i>&nbsp;Dashboard
+                <% end %>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -103,27 +105,19 @@
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group me-2">
-                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-              </div>
-              <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <span data-feather="calendar"></span>
-                This week
-              </button>
-            </div>
-          </div>
-
-
           <!-- logs_contact_infos_path, method: :delete -->
-          <%= link_to destroy_user_session_path, method: :delete, class: 'btn btn-info m-2' do %>
-          <i class="fas fa-sign-out-alt"></i>&nbsp;Logout
+          <% if !notice.nil? %>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              <p class=""><%= notice %></p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
           <% end %>
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <% if !alert.nil? %>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <p class=""><%= alert %></p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
           <%= yield %>
         </main>
       </div>
