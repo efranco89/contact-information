@@ -16,6 +16,31 @@ Things you may want to cover:
   Rails 6.0.4.4
   sqlite3
 
+* Deployment instructions
+
+  After cloning the project
+
+  1. do bundle install
+  2. EDITOR="mate --wait" bin/rails credentials:edit
+  3. yarn
+  4. do rails db:create && rails db:migrate
+
+  For being able to cipher the CC numbers please create the following
+  credentials in you credentials files
+
+  1. Go to the terminal and open a rails c
+  2. copy and paste Lockbox.generate_key
+  3. Open the rails credentials with you favorite editor/
+
+      EDITOR="nano --wait" bin/rails credentials:edit
+
+  4. Paste the generated key as shown at the bottom
+
+    lockbox:\n
+      master_key: "00000000000000000000000000000000000000000000000000000000000"
+
+  5. save and close the file
+
 * System dependencies
 
   For the background jobs the application depends on sidekiq and redis, please
@@ -43,31 +68,6 @@ Things you may want to cover:
   The ImportsContactsJob will import the contacts from the files uploaded by the user
   please make sure you have a redis server up and running, and set the
   SIDEKIQ_REDIS_SERVER_URL as described in System dependencies
-
-* Deployment instructions
-
-  After cloning the project
-
-  1. do bundle install
-  2. do rails db:create && rails db:migrate
-  3. rails credentials:edit
-  4. yarn
-
-  For being able to cipher the CC numbers please create the following
-  credentials in you credentials files
-
-  1. Go to the terminal and open a rails c
-  2. copy and paste Lockbox.generate_key
-  3. Open the rails credentials with you favorite editor/
-
-      EDITOR="nano --wait" bin/rails credentials:edit
-
-  4. Paste the generated key as shown at the bottom
-
-    lockbox:
-      master_key: "00000000000000000000000000000000000000000000000000000000000"
-
-  5. save and close the file
 
 * Start the app
 
