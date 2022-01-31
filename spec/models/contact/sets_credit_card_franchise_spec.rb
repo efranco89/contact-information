@@ -34,7 +34,7 @@ RSpec.describe Contact, type: :model do
         contact.email = "luisfrancoz1@gmail.com"
         contact.user_id = 1
         contact.save
-        expect(contact.errors.details[:franchise][0][:error]). to eq(
+        expect(contact.errors.details[:credit_card][0][:error]). to eq(
           'The credit card number is incorrect, please verify'
         )
       end

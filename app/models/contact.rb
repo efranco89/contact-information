@@ -182,8 +182,9 @@ class Contact < ApplicationRecord
         regex: %r'\A(417500)\d{10}\z'
       },
     ]
+    
     if self.credit_card.nil? || self.credit_card.empty?
-      errors.add(:franchise, 'The credit card number is either nil or empty')
+      errors.add(:credit_card, 'The credit card number is either nil or empty')
     else
       contact_franchise = franchises.select { |franchise|
         franchise if self.credit_card.match(franchise[:regex])
@@ -192,7 +193,7 @@ class Contact < ApplicationRecord
       unless contact_franchise.nil?
         self.franchise = contact_franchise[:issuer]
       else
-        errors.add(:franchise, "The credit card number is incorrect, please verify")
+        errors.add(:credit_card, "The credit card number is incorrect, please verify")
       end
     end
   end

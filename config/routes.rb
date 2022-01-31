@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :contact_log_failures
+  resources :file_logs
   resources :contacts
   devise_for :users
   root 'welcome#index'

@@ -7,5 +7,7 @@ RSpec.describe User, type: :model do
 
   describe 'relationships' do
     it { should have_many(:contacts) }
+    it { should have_many(:contact_log_failures) }
+    it { should have_many(:file_logs) }
   end
 end

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contact Log Failures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Error</th>
+      <th>User</th>
+      <th>Log file</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contact_log_failures.each do |contact_log_failure| %>
+      <tr>
+        <td><%= contact_log_failure.data %></td>
+        <td><%= contact_log_failure.error %></td>
+        <td><%= contact_log_failure.user_id %></td>
+        <td><%= contact_log_failure.log_file_id %></td>
+        <td><%= link_to 'Show', contact_log_failure %></td>
+        <td><%= link_to 'Edit', edit_contact_log_failure_path(contact_log_failure) %></td>
+        <td><%= link_to 'Destroy', contact_log_failure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Contact Log Failure', new_contact_log_failure_path %>

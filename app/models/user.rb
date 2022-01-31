@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :contacts
+  has_many :file_logs
+  has_many :contact_log_failures
+
 end

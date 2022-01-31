@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_181324) do
+ActiveRecord::Schema.define(version: 2022_01_31_163217) do
+
+  create_table "contact_log_failures", force: :cascade do |t|
+    t.text "data"
+    t.text "error"
+    t.string "error_line"
+    t.bigint "user_id"
+    t.bigint "file_log_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string "name"
@@ -21,6 +31,15 @@ ActiveRecord::Schema.define(version: 2022_01_30_181324) do
     t.string "franchise"
     t.string "email"
     t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "file_logs", force: :cascade do |t|
+    t.string "status"
+    t.bigint "user_id"
+    t.text "message"
+    t.text "file_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @file_log.status %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @file_log.user_id %>
+</p>
+
+<p>
+  <strong>Errors:</strong>
+  <%= @file_log.errors %>
+</p>
+
+<p>
+  <strong>File name:</strong>
+  <%= @file_log.file_name %>
+</p>
+
+<%= link_to 'Edit', edit_file_log_path(@file_log) %> |
+<%= link_to 'Back', file_logs_path %>

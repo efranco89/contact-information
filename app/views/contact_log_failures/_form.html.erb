@@ -1,0 +1,37 @@
+<%= form_with(model: contact_log_failure, local: true) do |form| %>
+  <% if contact_log_failure.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contact_log_failure.errors.count, "error") %> prohibited this contact_log_failure from being saved:</h2>
+
+      <ul>
+        <% contact_log_failure.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :data %>
+    <%= form.text_area :data %>
+  </div>
+
+  <div class="field">
+    <%= form.label :error %>
+    <%= form.text_area :error %>
+  </div>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :log_file_id %>
+    <%= form.text_field :log_file_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
