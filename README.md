@@ -49,6 +49,7 @@ Things you may want to cover:
 
     * export SIDEKIQ_REDIS_SERVER_URL="redis://redis_server_url" or
     * please edit you .bashrc and add at the end export SIDEKIQ_REDIS_SERVER_URL="redis://redis_server_url"
+    * The default is usually  export SIDEKIQ_REDIS_SERVER_URL="redis://localhost:6379/0"
 
 * How to run the test suite
 
