@@ -12,9 +12,9 @@ Things you may want to cover:
 
 * Ruby version
 
-  ruby 2.7.1
-  Rails 6.0.4.4
-  sqlite3
+  ruby 2.7.1<br>
+  Rails 6.0.4.4<br>
+  sqlite3<br>
 
 * Deployment instructions
 
@@ -36,7 +36,7 @@ Things you may want to cover:
 
   4. Paste the generated key as shown at the bottom
 
-    lockbox:\n
+    lockbox:<br>
       master_key: "00000000000000000000000000000000000000000000000000000000000"
 
   5. save and close the file
