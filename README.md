@@ -37,7 +37,7 @@ Things you may want to cover:
   4. Paste the generated key as shown at the bottom
 
     lockbox:<br>
-      master_key: "00000000000000000000000000000000000000000000000000000000000"
+       master_key: "00000000000000000000000000000000000000000000000000000000000"
 
   5. save and close the file
 
